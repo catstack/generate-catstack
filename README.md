@@ -1,0 +1,2 @@
+# generate-catstack
+Catstack CLI
