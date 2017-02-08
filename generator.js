@@ -21,57 +21,30 @@ module.exports = function(app) {
    * @api public
    */
 
-  app.task('catstack', ['files', 'generator', 'index']);
-  task(app, 'generator', ['generatorjs', 'index', 'install']);
+  app.task('new', function() {
+    
+  });
+  app.task('domain', function() {
+    console.log('creating domain')
+    console.log(app.options.name)  
+  });
+  app.task('effect', function() {
+    
+  });
+  app.task('action', function() {
+    
+  });
+  app.task('helper', function() {
+    
+  });
+  app.task('page', function() {
+    
+  });
+  app.task('element', function() {
+    
+  });
+  //task(app, 'generator', ['generatorjs', 'index', 'install']);
 
-  /**
-   * Write a `generator.js` file to the current working directory.
-   *
-   * ```sh
-   * $ gen catstack:file
-   * ```
-   * @name file
-   * @api public
-   */
-
-  task(app, 'generatorjs', 'templates/generator.js');
-
-  /**
-   * Write a `generator.js` file to the current working directory.
-   *
-   * ```sh
-   * $ gen catstack:file
-   * ```
-   * @name file
-   * @api public
-   */
-
-  task(app, 'index', 'templates/index.js');
-
-  /**
-   * Generate the files in the `templates` directory.
-   *
-   * ```sh
-   * $ gen catstack:templates
-   * ```
-   * @name templates
-   * @api public
-   */
-
-  task(app, 'templates', 'templates/templates/*');
-
-  /**
-   * Scaffold out a new catstack project. This task is an alias for the [catstack](#catstack)
-   * task, to allow running this generator with the following command:
-   *
-   * ```sh
-   * $ gen catstack
-   * ```
-   * @name default
-   * @api public
-   */
-
-  app.task('default', ['catstack']);
 };
 
 /**

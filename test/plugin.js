@@ -1,35 +1,50 @@
-'use strict';
+var test = require('tape')
+var generate = require('generate')
+var path = require('path')
+var exists = require('is-there')
+var tmp = require('tmp')
+var generator = require('../')
 
-require('mocha');
-var assert = require('assert');
-var generate = require('generate');
-var generator = require('./');
-var app;
 
-describe('generate-catstack', function() {
-  beforeEach(function() {
-    app = generate();
-  });
+test('generate-catstack should add tasks to the instance', function(t) {
+  var app = generate()
 
-  describe('plugin', function() {
-    it('should add tasks to the instance', function() {
-      app.use(generator);
-      assert(app.tasks.hasOwnProperty('default'));
-      assert(app.tasks.hasOwnProperty('catstack'));
-    });
+  app.use(generator);
+  t.true(app.tasks.hasOwnProperty('new'))
+  t.true(app.tasks.hasOwnProperty('domain'))
+  t.true(app.tasks.hasOwnProperty('effect'))
+  t.true(app.tasks.hasOwnProperty('action'))
+  t.true(app.tasks.hasOwnProperty('helper'))
+  t.true(app.tasks.hasOwnProperty('page'))
+  t.true(app.tasks.hasOwnProperty('element'))
 
-    it('should only register the plugin once', function(cb) {
-      var count = 0;
-      app.on('plugin', function(name) {
-        if (name === 'generate-catstack') {
-          count++;
-        }
-      });
-      app.use(generator);
-      app.use(generator);
-      app.use(generator);
-      assert.equal(count, 1);
-      cb();
-    });
-  });
-});
+  t.end()
+})
+
+test('should only register the plugin once', function(t) {
+  t.plan(1)
+  var app = generate()
+  app.on('plugin', function(name) {
+    if (name === 'generate-catstack') {
+      t.ok(true)
+    }
+  })
+  app.use(generator);
+  app.use(generator);
+  app.use(generator);
+})
+
+test('domain creates folder with name passed as option', function(t) {
+
+  var temp = tmp.dirSync() 
+  var tempPath = temp.name
+
+  var app = generate()
+  var domainName = 'piet'
+  app.cwd = tempPath
+  app.options.name = domainName 
+  app.use(generator)
+  app.generate('catstack:domain', function(err) {
+    t.ok(exists(path.join(tempPath, domainName)))
+  })
+})
