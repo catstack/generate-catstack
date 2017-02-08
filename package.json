@@ -1,22 +1,28 @@
 {
   "name": "generate-catstack",
-  "version": "1.0.0",
   "description": "Catstack generator",
-  "main": "index.js",
-  "scripts": {
-    "test": "tape test/*.js | tap-spec"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/catstack/generate-catstack.git"
-  },
-  "author": "pietgeursen",
-  "license": "MIT",
+  "version": "1.0.0",
+  "homepage": "https://github.com/pietgeursen %>/generate-catstack",
+  "author": "pietgeursen (n)",
+  "repository": "pietgeursen/generate-catstack",
   "bugs": {
-    "url": "https://github.com/catstack/generate-catstack/issues"
+    "url": "https://github.com/pietgeursen/generate-catstack/issues"
   },
-  "homepage": "https://github.com/catstack/generate-catstack#readme",
-  "dependencies": {
-    "generate": "^0.13.1"
-  }
+  "license": "MIT",
+  "files": [
+    "generator.js",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "generategenerator"
+  ]
 }
