@@ -38,13 +38,16 @@ test('domain creates folder with name passed as option', function(t) {
 
   var temp = tmp.dirSync() 
   var tempPath = temp.name
+  var domainName = 'piet'
+  var domainPath = path.join(tempPath, domainName)
 
   var app = generate()
-  var domainName = 'piet'
   app.cwd = tempPath
   app.options.name = domainName 
   app.use(generator)
   app.generate('catstack:domain', function(err) {
-    t.ok(exists(path.join(tempPath, domainName)))
+    t.error(err)
+    t.ok(exists(domainPath))
+    t.end()
   })
 })

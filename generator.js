@@ -1,6 +1,7 @@
 'use strict';
-
-var isValid = require('is-valid-app');
+var mkdir = require('mkdirp').sync
+var path = require('path')
+var isValid = require('is-valid-app')
 
 module.exports = function(app) {
   if (!isValid(app, 'generate-catstack')) return;
@@ -24,9 +25,9 @@ module.exports = function(app) {
   app.task('new', function() {
     
   });
-  app.task('domain', function() {
-    console.log('creating domain')
-    console.log(app.options.name)  
+  app.task('domain', function(cb) {
+    mkdir(path.join(app.cwd, app.options.name))
+    cb(null)
   });
   app.task('effect', function() {
     
